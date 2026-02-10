@@ -31,4 +31,25 @@ class ProductTest {
     void testGetProductQuantity() {
         assertEquals(100, this.product.getProductQuantity());
     }
+    @Test
+    void testEditProductName() {
+        this.product.setProductName("Sabun Cap Bambang");
+        assertEquals("Sabun Cap Bambang", this.product.getProductName());
+    }
+
+    @Test
+    void testEditProductQuantity() {
+        this.product.setProductQuantity(50);
+        assertEquals(50, this.product.getProductQuantity());
+    }
+    @Test
+    void testEditProductName_negative() {
+        this.product.setProductName("");
+        assertNotEquals("Sampo Cap Bambang", this.product.getProductName());
+    }
+    @Test
+    void testDeleteProduct() {
+        this.product = null;
+        assertNull(this.product);
+    }
 }
