@@ -1,3 +1,4 @@
+Module 1:
 
 Refleksi 1:
 
@@ -51,3 +52,47 @@ Refleksi 2:
    Saran untuk membuat kode lebih bersih adalah dengan membuat
  asetiap class test sebaiknya hanya menguji satu fitur atau satu
  aspek fungsional tertentu agar mudah dipahami dan dirawat.
+
+Module 2:
+
+Refleksi:
+
+1. Selama mengerjakan exercise, terdapat beberapa isu kualitas
+kode yang ditemukan. Salah satu isu utama adalah rendahnya test
+coverage, khususnya pada layer repository. Hal ini diperbaiki
+dengan menambahkan unit test yang mencakup fungsi-fungsi utama
+seperti pembuatan produk, pengambilan daftar produk, serta 
+kondisi ketika data masih kosong. Strategi yang digunakan adalah
+memprioritaskan pengujian pada logika bisnis inti agar setiap
+method publik memiliki pengujian yang memadai.
+
+Selain itu, terdapat isu terkait struktur dan konsistensi kode,
+seperti bagian kode yang belum teruji sepenuhnya. Perbaikan
+dilakukan dengan menambahkan pengujian yang relevan sehingga
+kode tersebut benar-benar divalidasi oleh test suite. Proses
+perbaikan selalu mengacu pada laporan dari tools analisis
+kualitas kode dan code coverage agar hasilnya terukur dan sesuai
+dengan standar kualitas.
+
+Secara keseluruhan, strategi yang digunakan bersifat iteratif,
+yaitu mengidentifikasi isu dari hasil pipeline CI, memperbaiki
+isu dengan dampak terbesar terlebih dahulu, lalu menjalankan 
+ulang pipeline untuk memastikan kualitas kode meningkat.
+
+2. Menurut saya, implementasi yang dibuat sudah memenuhi definisi
+Continuous Integration. Setiap kali ada perubahan kode yang di-push
+atau dilakukan pull request ke branch utama, pipeline CI akan
+berjalan secara otomatis untuk melakukan build, menjalankan
+unit test, serta mengecek kualitas kode. Hal ini membantu
+mendeteksi kesalahan sejak dini sebelum kode digabungkan ke branch
+utama.
+
+Implementasi ini juga sudah memenuhi konsep Continuous Deployment,
+karena setelah seluruh proses CI berhasil dijalankan, aplikasi
+akan dideploy secara otomatis ke Platform-as-a-Service (PaaS)
+tanpa intervensi manual. Dengan demikian, setiap perubahan kode
+yang lolos pengujian dapat langsung dirilis.
+
+Secara keseluruhan, workflow CI/CD ini mendukung otomatisasi,
+rapid feedback, dan stabilitas aplikasi, yang merupakan prinsip
+utama dari Continuous Integration dan Continuous Deployment.
