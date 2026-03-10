@@ -162,3 +162,20 @@ Dengan pemisahan ini, setiap komponen memiliki tanggung jawab yang jelas dan tid
    4. Kode menjadi tidak fleksibel
       Tanpa abstraksi, sistem akan sulit beradaptasi dengan kebutuhan baru di masa depan.
       Contoh: jika penyimpanan data awalnya menggunakan List dan ingin diganti menjadi database, seluruh kode mungkin harus diubah.
+
+Module 4:
+
+1. TDD Flow Reflection
+    Berdasarkan prinsip Percival (2017), alur TDD (Red-Green-Refactor) sangat berguna dalam proses pengembangan modul Order ini karena beberapa alasan:
+        - Kejelasan Kebutuhan: Menulis tes di awal memaksa saya untuk memahami persyaratan bisnis (seperti validasi status dan produk tidak boleh kosong) sebelum menulis kode.
+        - Keamanan dalam Refactoring: Saat saya melakukan refaktor dari hardcoded strings ke Enum, saya merasa aman karena tes yang sudah ada akan segera memberi tahu jika saya merusak fungsi yang sudah berjalan.
+        - Minimalisme: Saya hanya menulis kode yang benar-benar dibutuhkan untuk meloloskan tes, sehingga menghindari penambahan fungsi yang tidak relevan (Over-engineering).
+    Hal yang perlu dilakukan selanjutnya: Saya perlu mencoba menulis tes yang lebih kompleks, seperti tes untuk kondisi race condition atau integrasi antar layanan, untuk melihat sejauh mana TDD dapat menangani skenario dunia nyata yang lebih rumit.
+
+2. F.I.R.S.T. Principle Reflection
+   Unit test yang telah dibuat dalam tutorial ini secara umum telah mengikuti prinsip F.I.R.S.T.:
+    - Fast: Tes berjalan sangat cepat karena menggunakan unit testing standar dan Mockito (tidak perlu menyalakan seluruh context database atau server).
+    - Independent: Setiap tes tidak bergantung satu sama lain. Penggunaan @BeforeEach memastikan setiap tes memiliki data awal yang segar.
+    - Repeatable: Tes memberikan hasil yang sama setiap kali dijalankan di lingkungan manapun karena datanya di-mock dan tidak bergantung pada kondisi eksternal (seperti koneksi internet).
+    - Self-Validating: Tes memiliki assertion (assertEquals, assertThrows, dll.) yang secara otomatis menentukan apakah tes lulus atau gagal tanpa perlu pengecekan manual.
+    - Timely: Tes ditulis tepat waktu, yaitu sebelum kode implementasi dibuat (fase RED).
