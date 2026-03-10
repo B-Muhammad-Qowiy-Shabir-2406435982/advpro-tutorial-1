@@ -96,3 +96,69 @@ yang lolos pengujian dapat langsung dirilis.
 Secara keseluruhan, workflow CI/CD ini mendukung otomatisasi,
 rapid feedback, dan stabilitas aplikasi, yang merupakan prinsip
 utama dari Continuous Integration dan Continuous Deployment.
+
+Module 3:
+
+1. Pada proyek ini saya menerapkan beberapa prinsip dari SOLID Principles untuk meningkatkan kualitas kode, modularitas, dan kemudahan pemeliharaan sistem. Prinsip-prinsip yang diterapkan antara lain:
+
+   1. Single Responsibility Principle (SRP)
+      Setiap kelas memiliki satu tanggung jawab utama.
+      Contohnya:
+
+CarController hanya bertanggung jawab menangani HTTP request dan response.
+
+CarService bertanggung jawab untuk logika bisnis terkait mobil.
+
+CarRepository bertanggung jawab untuk pengelolaan data mobil.
+
+Dengan pemisahan ini, setiap komponen memiliki tanggung jawab yang jelas dan tidak saling bercampur.
+
+2. Open/Closed Principle (OCP)
+   Kode dirancang agar terbuka untuk pengembangan tetapi tertutup untuk modifikasi.
+   Contohnya dengan menggunakan interface seperti CarService dan CarRepository. Jika di masa depan ingin menambahkan implementasi baru (misalnya menggunakan database), kita cukup membuat implementasi baru tanpa mengubah kode yang sudah ada.
+
+   3. Liskov Substitution Principle (LSP)
+      Implementasi dari sebuah interface harus dapat menggantikan interface tersebut tanpa merusak fungsionalitas program.
+      Contohnya CarRepositoryImpl dapat digunakan sebagai pengganti CarRepository tanpa mengubah perilaku program.
+
+   4. Interface Segregation Principle (ISP)
+      Interface dibuat spesifik sesuai kebutuhan sehingga kelas tidak dipaksa mengimplementasikan metode yang tidak digunakan.
+      Contohnya CarService hanya berisi method yang berhubungan dengan operasi pada objek Car.
+
+      5. Dependency Inversion Principle (DIP)
+         Komponen tingkat tinggi tidak bergantung pada implementasi konkret, melainkan pada abstraksi.
+         Contohnya CarController tidak bergantung langsung pada CarServiceImpl, tetapi pada interface CarService.
+
+2. Penerapan SOLID memberikan beberapa keuntungan dalam pengembangan proyek ini.
+
+   1. Kode lebih mudah dipelihara (maintainable)
+      Karena setiap kelas memiliki tanggung jawab yang jelas, perubahan pada satu bagian tidak mempengaruhi bagian lain.
+      Contoh: jika ingin mengubah cara penyimpanan data mobil dari List ke database, kita hanya perlu mengubah implementasi CarRepository.
+
+   2. Kode lebih mudah dikembangkan (scalable)
+      Dengan menggunakan interface, kita dapat menambahkan fitur baru tanpa merusak kode yang sudah ada.
+      Contoh: menambahkan CarRepositoryDatabaseImpl untuk menyimpan data di database tanpa perlu mengubah CarController.
+
+   3. Kode lebih mudah diuji (testable)
+      Dengan adanya abstraction dan dependency injection, kita dapat menggunakan mock object saat melakukan unit testing.
+      Contoh: saat menguji CarService, kita bisa mengganti CarRepository dengan repository palsu (mock).
+
+   4. Struktur kode lebih rapi dan modular
+      Kode menjadi lebih terstruktur karena setiap layer memiliki fungsi masing-masing seperti controller, service, dan repository.
+
+3. Jika SOLID tidak diterapkan, beberapa masalah dapat muncul dalam proyek.
+
+   1. Kode sulit dipelihara
+      Jika satu kelas menangani banyak tanggung jawab, perubahan kecil dapat menyebabkan banyak error.
+      Contoh: jika CarController langsung mengelola data mobil tanpa service atau repository, maka semua logika akan bercampur dalam satu kelas.
+
+   2. Kode sulit dikembangkan
+      Tanpa menggunakan interface, setiap perubahan implementasi akan memaksa kita mengubah banyak bagian kode.
+      Contoh: jika CarController langsung menggunakan CarServiceImpl, maka ketika implementasi service berubah, controller juga harus ikut diubah.
+
+   3. Kode sulit diuji
+      Tanpa dependency injection, unit testing menjadi sulit karena kita tidak bisa mengganti dependency dengan mock object.
+
+   4. Kode menjadi tidak fleksibel
+      Tanpa abstraksi, sistem akan sulit beradaptasi dengan kebutuhan baru di masa depan.
+      Contoh: jika penyimpanan data awalnya menggunakan List dan ingin diganti menjadi database, seluruh kode mungkin harus diubah.
