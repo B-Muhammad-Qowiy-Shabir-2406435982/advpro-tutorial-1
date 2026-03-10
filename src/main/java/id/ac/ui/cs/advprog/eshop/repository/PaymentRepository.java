@@ -10,14 +10,20 @@ public class PaymentRepository {
     private List<Payment> paymentData = new ArrayList<>();
 
     public Payment save(Payment payment) {
-        return null; // Sengaja dibuat null agar tes gagal
+        paymentData.add(payment);
+        return payment;
     }
 
     public Payment findById(String id) {
-        return null; // Sengaja dibuat null agar tes gagal
+        for (Payment payment : paymentData) {
+            if (payment.getId().equals(id)) {
+                return payment;
+            }
+        }
+        return null;
     }
 
     public List<Payment> findAll() {
-        return null;
+        return paymentData;
     }
 }
