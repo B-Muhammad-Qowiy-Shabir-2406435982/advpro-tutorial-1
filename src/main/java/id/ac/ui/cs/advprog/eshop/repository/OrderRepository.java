@@ -9,9 +9,31 @@ import java.util.List;
 public class OrderRepository {
     private List<Order> orderData = new ArrayList<>();
 
-    public Order save(Order order) { return null; }
+    public Order save(Order order) {
+        for (int i = 0; i < orderData.size(); i++) {
+            if (orderData.get(i).getId().equals(order.getId())) {
+                orderData.set(i, order);
+                return order;
+            }
+        }
+        orderData.add(order);
+        return order;
+    }
 
-    public Order findById(String id) { return null; }
+    public Order findById(String id) {
+        return orderData.stream()
+                .filter(order -> order.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
 
-    public List<Order> findAllByAuthor(String author) { return null; }
+    public List<Order> findAllByAuthor(String author) {
+        List<Order> results = new ArrayList<>();
+        for (Order order : orderData) {
+            if (order.getAuthor().equals(author)) {
+                results.add(order);
+            }
+        }
+        return results;
+    }
 }
