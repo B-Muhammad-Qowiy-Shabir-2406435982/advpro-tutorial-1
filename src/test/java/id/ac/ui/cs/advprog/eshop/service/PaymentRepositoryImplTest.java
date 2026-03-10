@@ -31,7 +31,7 @@ class PaymentServiceTest {
     @Test
     void testAddPaymentVoucherValid() {
         Map<String, String> data = new HashMap<>();
-        data.put("voucherCode", "ESHOP1234ABC5678"); // 16 char, mulai ESHOP, 8 angka
+        data.put("voucherCode", "ESHOP1234ABC5678"); // 16 char, ESHOP, 8 angka
 
         when(paymentRepository.save(any(Payment.class))).thenAnswer(i -> i.getArguments()[0]);
 
@@ -50,5 +50,18 @@ class PaymentServiceTest {
 
         Payment result = paymentService.addPayment(order, "BANK_TRANSFER", data);
         assertEquals("SUCCESS", result.getStatus());
+        verify(order, times(1)).setStatus("SUCCESS");
+    }
+
+    @Test
+    void testAddPaymentBankTransferInvalid() {
+        Map<String, String> data = new HashMap<>();
+        data.put("bankName", ""); // Nama bank kosong
+
+        when(paymentRepository.save(any(Payment.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        Payment result = paymentService.addPayment(order, "BANK_TRANSFER", data);
+        assertEquals("REJECTED", result.getStatus());
+        verify(order, times(1)).setStatus("FAILED");
     }
 }
